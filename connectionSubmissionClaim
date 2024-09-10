@@ -1,0 +1,41 @@
+using System;
+using System.Windows;
+
+namespace ContractClaimSystem
+{
+    public partial class SubmitClaimWindow : Window
+    {
+        private ContractClaimContext _context;
+
+        public SubmitClaimWindow()
+        {
+            InitializeComponent();
+            _context = new ContractClaimContext();
+        }
+
+        private void SubmitClaim_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var newClaim = new Claim
+                {
+                    ContractID = int.Parse(ContractIDTextBox.Text),
+                    ClaimAmount = decimal.Parse(ClaimAmountTextBox.Text),
+                    ClaimDate = DateTime.Now,
+                    ClaimStatus = "Pending",
+                    SubmittedBy = "User123", // You can dynamically set this based on the logged-in user
+                    ApprovedBy = null
+                };
+
+                _context.Claims.Add(newClaim);
+                _context.SaveChanges();
+
+                MessageBox.Show("Claim Submitted Successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+    }
+}

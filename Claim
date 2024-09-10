@@ -1,0 +1,14 @@
+public class Claim
+{
+    public int ClaimID { get; set; }
+    public int ContractID { get; set; } // Foreign Key
+    public DateTime ClaimDate { get; set; }
+    public decimal ClaimAmount { get; set; }
+    public string ClaimStatus { get; set; }
+    public string SubmittedBy { get; set; }
+    public string ApprovedBy { get; set; }
+
+    // Navigation property
+    public Contract Contract { get; set; }
+    public ICollection<SupportingDocument> SupportingDocuments { get; set; }
+}

@@ -1,0 +1,24 @@
+<Window x:Class="ContractClaimSystem.TrackClaimWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Track Claim Status" Height="400" Width="500">
+
+    <Grid>
+
+        <!-- Title -->
+        <TextBlock Text="Track Claim Status" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,0" />
+
+        
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center"
+
+            <TextBlock Text="Enter Claim ID" />
+            <TextBox Name="ClaimIDTextBox" Width="300" />
+
+            <Button Content="SearchButton" Width="100" Height="30"  Click="SearchClaim_Click" />
+
+            <!-- Display the claim status here -->
+            <TextBlock Name="ClaimStatusTextBlock" Text="Status: " FontSize="16" FontWeight="Bold"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

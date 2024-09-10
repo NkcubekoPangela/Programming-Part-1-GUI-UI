@@ -1,0 +1,29 @@
+using Microsoft.EntityFrameworkCore;
+
+public class ContractClaimContext : DbContext
+{
+    public DbSet<Contract> Contracts { get; set; }
+    public DbSet<Claim> Claims { get; set; }
+    public DbSet<SupportingDocument> SupportingDocuments { get; set; }
+    public DbSet<User> Users { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        // Define the connection string to your database here
+        optionsBuilder.UseSqlServer(@"Server=your_server;Database=ContractClaimDB;Trusted_Connection=True;");
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Configure relationships and constraints (optional)
+        modelBuilder.Entity<Claim>()
+            .HasOne(c => c.Contract)
+            .WithMany(c => c.Claims)
+            .HasForeignKey(c => c.ContractID);
+
+        modelBuilder.Entity<SupportingDocument>()
+            .HasOne(d => d.Claim)
+            .WithMany(c => c.SupportingDocuments)
+            .HasForeignKey(d => d.ClaimID);
+    }
+}

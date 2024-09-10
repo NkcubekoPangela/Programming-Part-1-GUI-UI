@@ -1,0 +1,23 @@
+private void ApproveClaim_Click(object sender, RoutedEventArgs e){
+
+        try {
+            var selectedClaim = (Claim)ClaimsListBox.SelectedItem;
+            if (selectedClaim != null){
+                var claimToUpdate = _context.Claims.Find(selectedClaim.ClaimID);
+                claimToUpdate.ClaimsStatus = "Approved";
+                claimToUpdate.ApprovedBy = "St10107277";
+                _context.SaveChanges();
+                MessageBox.Show("Claim Approved Successfully!");
+
+            }
+            else {
+            MessageBox.Show("Please select a claim to approve.");
+            }
+        }   
+
+            }
+            catch (Exception ex){
+              MessageBox.Show($"Error: {ex.Message}");  
+            }    
+       
+}

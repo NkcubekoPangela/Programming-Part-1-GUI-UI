@@ -1,0 +1,18 @@
+private void SearchClaim_Click(object sender, RoutedEventArgs e){
+    try{
+        int claimId = int.Parse(ClaimIDTextBox.Text);
+        var claim = _context.Claims.Find(claimId);
+        if (claim !=null){
+            ClaimStatusTextBlock.Text = $"Status: {claim.ClaimStatus}";
+
+        }
+        else {
+            ClaimStatusTextBlock.Text = "Claim not found.";
+
+        }
+    }
+    catch (Exception ex){
+        MessageBox.Show($"Error: {ex.Message}");
+    }
+
+}
